@@ -1,0 +1,21 @@
+﻿@model Post
+
+@{ 
+
+}
+
+<div>
+    <form method="post">
+        <input asp-for="Id" type="hidden" />
+        <div>
+            <label>Title</label>
+            <input asp-for="Title" />
+        </div>
+        <div>
+            <label>Body</label>
+            <input asp-for="Body" />
+        </div>
+        <input type="submit" value="Submit" />
+    </form>
+</div>
+
