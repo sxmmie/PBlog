@@ -13,6 +13,12 @@
             <a asp-controller="Home" asp-action="Post" asp-route-id="@post.Id">
                 @post.Title
             </a>
+            <a asp-controller="Home" asp-action="Edit" asp-route-id="@post.Id">
+                Edit
+            </a>
+            <a asp-controller="Home" asp-action="Remove" asp-route-id="@post.Id">
+                Edit
+            </a>
         </li>
         }
     </ul>
