@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\content\static\" />
+    <Folder Include="wwwroot\content\blog\" />
   </ItemGroup>
 
 </Project>
