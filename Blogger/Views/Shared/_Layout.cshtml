@@ -5,23 +5,25 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" initial-scale=1.0 />
     <title>@ViewBag.Title</title>
+    <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
     <div>
-        <a asp-controller="Home" asp-action="Index">Home</a>
-        <a asp-controller="Home" asp-action="Edit">Create Post</a>
+        <nav>
+            <a asp-controller="Home" asp-action="Index">Home</a>
+            <a asp-controller="Home" asp-action="Edit">Create Post</a>
 
-        <a asp-controller="Admin" asp-action="Index">Admin Panel</a>
+            <a asp-controller="Admin" asp-action="Index">Admin Panel</a>
 
-        @if (User.Identity.IsAuthenticated)
-        {
-            <a asp-controller="Auth" asp-action="Logout">Log Out</a>
-        }
-        else
-        {
-            <a asp-controller="Auth" asp-action="Login">Sign In</a>
-        }
-
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a asp-controller="Auth" asp-action="Logout">Log Out</a>
+            }
+            else
+            {
+                <a asp-controller="Auth" asp-action="Login">Sign In</a>
+            }
+        </nav>
     </div>
     <div>
         @RenderBody()
