@@ -17,6 +17,11 @@ namespace Blogger.Data.FileManager
             _imagePath = config["Path:Images"];
         }
 
+        public FileStream ImageStream(string image)
+        {
+            return new FileStream(Path.Combine(_imagePath, image), FileMode.Open, FileAccess.Read);
+        }
+
         public async Task<string> SaveImage(IFormFile image)
         {
             try

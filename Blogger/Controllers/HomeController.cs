@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Blogger.Data;
+using Blogger.Data.FileManager;
 using Blogger.Data.Repository;
 using Blogger.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +15,12 @@ namespace Blogger.Controllers
     public class HomeController : Controller
     {
         private readonly IRepository _repo;
+        private readonly IFileManager _fileManager;
 
-        public HomeController(IRepository repo)
+        public HomeController(IRepository repo, IFileManager fileManager)
         {
             _repo = repo;
+            _fileManager = fileManager;
         }
 
         // GET: /<controller>/
@@ -33,6 +36,14 @@ namespace Blogger.Controllers
             var post = _repo.GetPost(id);
 
             return View(post);
+        }
+
+        // Streaming images
+        [HttpGet("/Image/{iamge}")]
+        public IActionResult Image(string image)
+        {
+            var mime = image.Substring(image.LastIndexOf(".") + 1);
+            return new FileStreamResult(_fileManager.ImageStream(image), $"image/{image}");
         }
     }
 }
