@@ -7,17 +7,27 @@
     <span class="title">My Personal Blog</span>
 </div>
 
-<img src="~/content/static/freecodecamp.PNG" width="500"/>
+<!--<img src="~/content/static/freecodecamp.PNG" width="500"/> -->
 
 <div class="container">
-    <ul>
-        @foreach (var post in Model)
-        {
-        <li>
-            <a asp-controller="Home" asp-action="Post" asp-route-id="@post.Id">
+    @*<ul>
+            @foreach (var post in Model)
+            {
+                <li>
+                    <a asp-controller="Home" asp-action="Post" asp-route-id="@post.Id">
+                        @post.Title
+                    </a>
+                </li>
+            }
+        </ul>*@
+    @foreach (var post in Model)
+    {
+        var image_path = $"/Image/{post.Image}";
+        <a class="post" asp-controller="Home" asp-action="Post" asp-route-id="@post.Id">
+            <img src="@image_path" />
+            <span class="title">
                 @post.Title
-            </a>
-        </li>
-        }
-    </ul>
+            </span>
+        </a>
+    }
 </div>

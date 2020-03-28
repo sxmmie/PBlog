@@ -42,9 +42,9 @@ namespace Blogger.Data.FileManager
 
                 return fileName;
             }
-            catch(Exception ex)
+            catch(Exception e)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(e.Message);
                 return "Error";
             }
         }

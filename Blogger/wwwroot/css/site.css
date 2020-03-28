@@ -1,5 +1,6 @@
 ﻿body {
     margin: 0;
+    background-color: #efefef;
 }
 
 a {
@@ -7,9 +8,9 @@ a {
     text-decoration: none;
 }
 
-    a:hover {
-        text-decoration: underline;
-    }
+a:hover {
+    text-decoration: underline;
+}
 
 nav {
     background-color: #142127;
@@ -18,16 +19,16 @@ nav {
     text-align: center;
 }
 
-    nav a {
-        display: inline-block;
-        padding: 15px;
-    }
+nav a {
+    display: inline-block;
+    padding: 15px;
+}
 
 .main-img {
     position: relative;
     height: 500px;
+    background-image: url('../content/static/freecodecamp.png');
     background-position: center;
-    background-image: url("../content/static/");
     background-size: cover;
 }
 
@@ -37,6 +38,7 @@ nav {
     font-size: 40px;
     left: 50%;
     text-transform: translateX(-50%);
+    top: 35%;
     text-shadow: 0 0 8px black;
 }
 
@@ -44,4 +46,26 @@ nav {
     max-width: 800px;
     width: 100%;
     margin: auto;
+}
+
+.post {
+    margin: 5px;
+    position: relative;
+    display: flex;
+    height: 400px;
+    box-shadow: 0 0 5px 0 black;
+}
+
+.post-body {
+    margin: -5px 5px 0;
+    background-color: white;
+}
+
+.post img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.no-shadow {
+    box-shadow: none;
 }
