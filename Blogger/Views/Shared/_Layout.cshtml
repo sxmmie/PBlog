@@ -5,6 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" initial-scale=1.0 />
     <title>@ViewBag.Title</title>
+    <meta name="keywords" content="@ViewBag.Kwywords" />
+    <meta name="description" content="@ViewBag.Description" />
     <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
@@ -12,7 +14,10 @@
         <nav>
             <a asp-controller="Home" asp-action="Index">Home</a>
 
-            <a asp-controller="Admin" asp-action="Index">Admin Panel</a>
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <a asp-controller="Admin" asp-action="Index">Admin Panel</a>
+            }
 
             @if (User.Identity.IsAuthenticated)
             {

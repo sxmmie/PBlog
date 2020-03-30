@@ -56,16 +56,16 @@ nav a {
     box-shadow: 0 0 5px 0 black;
 }
 
-.post-body {
-    margin: -5px 5px 0;
-    background-color: white;
-}
+    .post-body {
+        margin: -5px 5px 0;
+        background-color: white;
+    }
 
-.post img {
-    width: 100%;
-    object-fit: cover;
-}
+    .post img {
+        width: 100%;
+        object-fit: cover;
+    }
 
-.no-shadow {
-    box-shadow: none;
-}
+    .no-shadow {
+        box-shadow: none;
+    }

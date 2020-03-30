@@ -12,6 +12,23 @@
             <input asp-for="Title" />
         </div>
         <div>
+            <label>Description</label>
+            <input asp-for="Description" />
+        </div>
+        <div>
+            <label>Tags</label>
+            <input asp-for="Tags" />
+        </div>
+        <div>
+            <label>Category</label>
+            <input />
+            <select asp-for="Category">
+                <option value="0">Travel</option>
+                <option value="1">Programming</option>
+                <option value="2">Photography</option>
+            </select>
+        </div>
+        <div>
             <label>Body</label>
             <input asp-for="Body" />
         </div>

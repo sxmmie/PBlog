@@ -46,7 +46,10 @@ namespace Blogger.Controllers
                 return View(new PostViewModel { 
                     Id = post.Id,
                     Title = post.Title,
-                    Body = post.Body
+                    Body = post.Body,
+                    Description = post.Description,
+                    Tags = post.Tags,
+                    Category = post.Category
                 });
             }
         }
