@@ -47,6 +47,7 @@ namespace Blogger.Controllers
                     Id = post.Id,
                     Title = post.Title,
                     Body = post.Body,
+                    CurrentImage = post.Image,
                     Description = post.Description,
                     Tags = post.Tags,
                     Category = post.Category
@@ -61,8 +62,15 @@ namespace Blogger.Controllers
             {
                 Id = vm.Id,
                 Title = vm.Title,
-                Body = vm.Body,
-                Image = await _fileManager.SaveImage(vm.Image)
+                Body = vm.Body
+            };
+
+            if (vm.Image == null)
+            {
+                post.Image = vm.CurrentImage;
+            } else
+            {
+                post.Image = await _fileManager.SaveImage(vm.Image);
             };
 
             if (post.Id > 0)
