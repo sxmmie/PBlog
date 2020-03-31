@@ -10,6 +10,8 @@ namespace Blogger.Data.Repository
     {
         // Task<List<Post>> GetAllPosts();
         List<Post> GetAllPosts();
+        List<Post> GetAllPosts(string category);
+
         void UpdatePost(Post post);
         void AddPost(Post post);
 

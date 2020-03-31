@@ -23,6 +23,19 @@ namespace Blogger.Data.Repository
             return posts;
         }
 
+        public List<Post> GetAllPosts(string category)
+        {
+            Func<Post, bool> InCategory = (post) => { return post.Category.ToLower().Equals(category.ToLower()); };
+
+            return _ctx.Posts
+               .Where(post => InCategory(post))
+               .ToList();
+
+            /*return _ctx.Posts
+                .Where(p => p.Category.ToLower().Equals(category.ToLower()))
+                .ToList();*/
+        }
+
         /*public async Task<List<Post>> GetAllPosts()
         {
             var posts = await _ctx.Posts.ToListAsync();
