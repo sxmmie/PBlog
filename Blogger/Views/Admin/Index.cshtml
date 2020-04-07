@@ -5,20 +5,24 @@
 
 <h1>Admin Panel</h1>
 
+<a class="title-link" asp-controller="Admin" asp-action="Edit">
+    Add New Post
+</a>
+
 <div>
     <ul>
         @foreach (var post in Model)
         {
-        <li>
-            @post.Title
+            <li>
+                @post.Title
 
-            <a asp-controller="Admin" asp-action="Edit" asp-route-id="@post.Id">
-                Edit
-            </a>
-            <a asp-controller="Home" asp-action="Remove" asp-route-id="@post.Id">
-                Delete
-            </a>
-        </li>
+                <a class="title-link" asp-controller="Admin" asp-action="Edit" asp-route-id="@post.Id">
+                    Edit
+                </a>
+                <a class="title-link" asp-controller="Home" asp-action="Remove" asp-route-id="@post.Id">
+                    Delete
+                </a>
+            </li>
         }
     </ul>
 </div>

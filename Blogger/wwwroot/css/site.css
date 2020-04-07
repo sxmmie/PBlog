@@ -42,6 +42,10 @@ nav a {
     text-shadow: 0 0 8px black;
 }
 
+.title-link {
+    color: blue;
+}
+
 .container {
     max-width: 800px;
     width: 100%;
