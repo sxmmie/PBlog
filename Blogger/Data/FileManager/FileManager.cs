@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using PhotoSauce.MagicScaler;
 
 namespace Blogger.Data.FileManager
 {
@@ -22,6 +23,22 @@ namespace Blogger.Data.FileManager
             return new FileStream(Path.Combine(_imagePath, image), FileMode.Open, FileAccess.Read);
         }
 
+        public bool RevomeImage(string image)
+        {
+            try
+            {
+                var file = Path.Combine(_imagePath, image);
+                    if (File.Exists(file))
+                    File.Delete(file);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
         public async Task<string> SaveImage(IFormFile image)
         {
             try
@@ -37,7 +54,7 @@ namespace Blogger.Data.FileManager
 
                 using (var fileStream = new FileStream(Path.Combine(save_path, fileName), FileMode.Create))
                 {
-                    await image.CopyToAsync(fileStream);
+                    MagicImageProcessor.ProcessImage(image.OpenReadStream(), fileStream, ImageOptions());  
                 }
 
                 return fileName;
@@ -48,5 +65,16 @@ namespace Blogger.Data.FileManager
                 return "Error";
             }
         }
+
+        private ProcessImageSettings ImageOptions() => new ProcessImageSettings
+        {
+            Width = 800,
+            Height = 500,
+            ResizeMode = CropScaleMode.Crop,
+
+            SaveFormat = FileFormat.Jpeg,
+            JpegQuality = 100,
+            JpegSubsampleMode = ChromaSubsampleMode.Subsample420
+        };
     }
 }

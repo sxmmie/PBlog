@@ -8,10 +8,13 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
+    <PackageReference Include="PhotoSauce.MagicScaler" Version="0.10.3" />
   </ItemGroup>
-
+  
   <ItemGroup>
-    <Folder Include="wwwroot\content\blog\" />
+    <Content Update="wwwroot/content/blog/*.*" CopyToPublishDirectory="Never" />
+    <Content Update="wwwroot/lib/**/*.*" CopyToPublishDirectory="Never" />
+    <Content Update="wwwroot/lib/**/dist/**/*.*" CopyToPublishDirectory="Always" />
   </ItemGroup>
 
   <ItemGroup>

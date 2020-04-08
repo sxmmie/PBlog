@@ -11,5 +11,6 @@ namespace Blogger.Data.FileManager
     {
         FileStream ImageStream(string image);
         Task<string> SaveImage(IFormFile image);
+        bool RevomeImage(string image);
     }
 }

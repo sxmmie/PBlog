@@ -68,8 +68,14 @@ namespace Blogger.Controllers
             if (vm.Image == null)
             {
                 post.Image = vm.CurrentImage;
-            } else
+            } 
+            else
             {
+                if (!String.IsNullOrEmpty(vm.CurrentImage))
+                {
+                    _fileManager.RevomeImage(vm.CurrentImage);
+                }
+
                 post.Image = await _fileManager.SaveImage(vm.Image);
             };
 
