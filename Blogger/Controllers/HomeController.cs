@@ -40,6 +40,7 @@ namespace Blogger.Controllers
 
         // Streaming images
         [HttpGet("/Image/{iamge}")]
+        [ResponseCache(CacheProfileName = "Monthly")]
         public IActionResult Image(string image)
         {
             var mime = image.Substring(image.LastIndexOf(".") + 1);
