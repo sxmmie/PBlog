@@ -6,6 +6,8 @@ using Blogger.Data;
 using Blogger.Data.FileManager;
 using Blogger.Data.Repository;
 using Blogger.Models;
+using Blogger.Models.Comments;
+using Blogger.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -24,11 +26,14 @@ namespace Blogger.Controllers
         }
 
         // GET: /<controller>/
-        public IActionResult Index(string category)
+        public IActionResult Index(int pageNumber, string category)
         {
-            var posts = string.IsNullOrEmpty(category) ? _repo.GetAllPosts() : _repo.GetAllPosts(category);
+            if (pageNumber < 0)
+                return RedirectToAction("Index", new { pageNumber = 1, category }); // set defaults
 
-            return View(posts);
+            var vm = _repo.GetAllPosts(pageNumber, category);
+
+            return View(vm);
         }
 
         public IActionResult Post(int id)
@@ -45,6 +50,41 @@ namespace Blogger.Controllers
         {
             var mime = image.Substring(image.LastIndexOf(".") + 1);
             return new FileStreamResult(_fileManager.ImageStream(image), $"image/{image}");
+        }
+
+        public async Task<IActionResult> Comment(CommentViewModel vm)
+        {
+            if (!ModelState.IsValid)
+                return RedirectToAction("Post", new { id = vm.PostId });
+
+            var post = _repo.GetPost(vm.PostId);
+            if (vm.MainCommentId == 0)
+            {
+                post.MainComments = post.MainComments ?? new List<MainComment>();
+
+                post.MainComments.Add(new MainComment
+                {
+                    Message = vm.Message,
+                    Created = DateTimeOffset.Now
+                });
+
+                _repo.UpdatePost(post);
+            }
+            else
+            {
+                var comment = new SubComment
+                {
+                    MainCommentId = vm.MainCommentId,
+                    Message = vm.Message,
+                    Created = DateTimeOffset.Now
+                };
+
+                _repo.AddSubComment(comment);
+            }
+
+            await _repo.SavageChangesAsync();
+
+            return RedirectToAction("Post", new { id = vm.PostId });
         }
     }
 }

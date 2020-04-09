@@ -28,7 +28,7 @@ namespace Blogger.Data.FileManager
             try
             {
                 var file = Path.Combine(_imagePath, image);
-                    if (File.Exists(file))
+                if (File.Exists(file))
                     File.Delete(file);
                 return true;
             }
