@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Blogger.Models;
+using Blogger.Models.Comments;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blogger.Data.Repository
@@ -55,7 +56,10 @@ namespace Blogger.Data.Repository
 
         public Post GetPost(int id)
         {
-            var post = _ctx.Posts.FirstOrDefault(p => p.Id == id);
+            var post = _ctx.Posts
+                .Include(p => p.MainComments)
+                    .ThenInclude(mc => mc.SubComments)
+                .FirstOrDefault(p => p.Id == id);
             
             return post;
         }
@@ -73,6 +77,11 @@ namespace Blogger.Data.Repository
             }
 
             return false;
+        }
+
+        public void AddSubComment(SubComment comment)
+        {
+            _ctx.SubComments.Add(comment);
         }
     }
 }

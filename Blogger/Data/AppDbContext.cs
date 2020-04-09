@@ -1,4 +1,5 @@
 ﻿using Blogger.Models;
+using Blogger.Models.Comments;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -17,5 +18,7 @@ namespace Blogger.Data
         }
 
         public DbSet<Post> Posts { get; set; }
+        public DbSet<MainComment> MainComments { get; set; }
+        public DbSet<SubComment> SubComments { get; set; }
     }
 }
