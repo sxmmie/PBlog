@@ -42,6 +42,7 @@ namespace Blogger.Data.Repository
             var posts = new IndexViewModel
             {
                 PageNumber = pageNumber,
+                PageCount = (int) Math.Ceiling((double)postsCount / pageSize),
                 NextPage = postsCount > skipAmount + pageSize,
                 Category = category,
                 Posts = query.Skip(skipAmount).Take(pageSize).ToList()
