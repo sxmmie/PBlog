@@ -29,7 +29,9 @@
     <div class="post-body">
         @Html.Raw(Model.Body)
     </div>
-    <div class="comment-section">
+    @if(User.Identity.IsAuthenticated)
+    {
+         <div class="comment-section">
         @{
             await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = Model.Id, MainCommentId = 0 });
         }
@@ -50,5 +52,9 @@
                 }
             </div>
         }
+    </div>
+    }
+    <div>
+        <a asp-controller="Auth" asp-action="Login">Sign in</a> to comment on this pos
     </div>
 </div>
