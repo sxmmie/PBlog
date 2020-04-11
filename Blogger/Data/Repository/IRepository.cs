@@ -13,7 +13,7 @@ namespace Blogger.Data.Repository
         // Task<List<Post>> GetAllPosts();
         List<Post> GetAllPosts();
         //IndexViewModel GetAllPosts(int pageNumber);
-        IndexViewModel GetAllPosts(int pageNumber, string category);
+        IndexViewModel GetAllPosts(int pageNumber, string category, string search);
 
         void UpdatePost(Post post);
         void AddPost(Post post);

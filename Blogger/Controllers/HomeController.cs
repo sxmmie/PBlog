@@ -26,12 +26,12 @@ namespace Blogger.Controllers
         }
 
         // GET: /<controller>/
-        public IActionResult Index(int pageNumber, string category)
+        public IActionResult Index(int pageNumber, string category, string search)
         {
             if (pageNumber < 0)
                 return RedirectToAction("Index", new { pageNumber = 1, category }); // set defaults
 
-            var vm = _repo.GetAllPosts(pageNumber, category);
+            var vm = _repo.GetAllPosts(pageNumber, category, search);
 
             return View(vm);
         }
