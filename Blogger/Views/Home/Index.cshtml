@@ -9,6 +9,12 @@
 
 <div class="main-img">
     <span class="title">My Personal Blog</span>
+    <form asp-controller="Home" asp-action="Index" method="get">
+        <input type="hidden" name="pageNumber" value="@Model.PageNumber" />
+        <input type="hidden" name="category" value="@Model.Category" />
+        <input class="search" type="text" name="search" value="@Model.Search" placeholder="Search content" />
+        <button class="submit-btn">Search</button>
+    </form>
 </div>
 
 <!--<img src="~/content/static/freecodecamp.PNG" width="500"/> -->

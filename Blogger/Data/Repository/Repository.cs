@@ -26,17 +26,20 @@ namespace Blogger.Data.Repository
             return posts;
         }
 
-        public IndexViewModel GetAllPosts(int pageNumber, string category)
+        public IndexViewModel GetAllPosts(int pageNumber, string category, string search)
         {
             Func<Post, bool> InCategory = (post) => { return post.Category.ToLower().Equals(category.ToLower()); };
 
             var pageSize = 5;
             var skipAmount = pageSize * (pageNumber - 1);
 
-            var query = _ctx.Posts.AsQueryable();
+            var query = _ctx.Posts.AsNoTracking().AsQueryable();
 
             if (String.IsNullOrEmpty(category))
                 query = query.Where(x => InCategory(x));
+
+            if (!String.IsNullOrEmpty(search))
+                query = query.Where(x => EF.Functions.Like(x.Title, $"%{search}%") || EF.Functions.Like(x.Body, $"%{search}%") || EF.Functions.Like(x.Description, $"%{search}%"));
 
             var postsCount = query.Count();
             var pageCount = (int)Math.Ceiling((double)postsCount / pageSize);
@@ -46,6 +49,7 @@ namespace Blogger.Data.Repository
                 PageNumber = pageNumber,
                 PageCount = pageCount,
                 NextPage = postsCount > skipAmount + pageSize,
+                Search = search,
                 Pages = PageHelper.PageNumbers(pageNumber, pageCount).ToList(),
                 Category = category,
                 Posts = query.Skip(skipAmount).Take(pageSize).ToList()
